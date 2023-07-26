@@ -50,6 +50,27 @@ class UploadController
         }
     }
 
+    public function relatorio1()
+    {
+        $db = new Database();
+        $data = $db->getRelatorio1();
+        include_once './App/Views/relatorio1.php';
+    }
+
+    public function relatorio2()
+    {
+        $db = new Database();
+        $data = $db->getRelatorio2();
+        include_once './App/Views/relatorio2.php';
+    }
+
+    public function relatorio3()
+    {
+        $db = new Database();
+        $data = $db->getRelatorio3();
+        include_once './App/Views/relatorio3.php';
+    }
+
     private function sanitizeHeader($header)
     {
         return array_map(function ($column) {

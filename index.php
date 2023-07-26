@@ -7,12 +7,17 @@ spl_autoload_register(function ($className) {
 
 use App\Controllers\UploadController;
 
-// Roteamento simples para direcionar a ação correta com base no parâmetro "action"
 $action = $_GET['action'] ?? 'showForm';
+
 $controller = new UploadController();
 
-if ($action === 'showForm') {
+if ($action === 'showForm')
     $controller->showForm();
-} elseif ($action === 'upload') {
+elseif ($action === 'relatorio1')
+    $controller->relatorio1();
+elseif ($action === 'relatorio2')
+    $controller->relatorio2();
+elseif ($action === 'relatorio3')
+    $controller->relatorio3();
+elseif ($action === 'upload')
     $controller->uploadFile();
-}

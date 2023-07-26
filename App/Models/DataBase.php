@@ -43,4 +43,58 @@ class Database
             return false;
         }
     }
+
+    public function getRelatorio1()
+    {
+        try {
+            $query = "SELECT name, number_of_employees
+                      FROM  organizations
+                      WHERE number_of_employees > 5000
+                      ORDER BY name
+                      LIMIT 500";
+            $stmt = $this->conn->query($query);
+            $result = $stmt->fetchAll();
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Erro ao obter dados do banco de dados: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getRelatorio2()
+    {
+        try {
+            $query = "SELECT *
+                      FROM organizations
+                      WHERE founded < 2000 AND number_of_employees < 1000
+                      ORDER BY founded";
+            $stmt = $this->conn->query($query);
+            $result = $stmt->fetchAll();
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Erro ao obter dados do banco de dados: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getRelatorio3()
+    {
+        try {
+            $query = "SELECT industry, country,
+                      COUNT(DISTINCT name)     AS quantidade_organizacoes,
+                      SUM(number_of_employees) AS quantidade_funcionarios
+                      FROM     organizations
+                      GROUP BY industry, country
+                      ORDER BY industry";
+            $stmt = $this->conn->query($query);
+            $result = $stmt->fetchAll();
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Erro ao obter dados do banco de dados: " . $e->getMessage();
+            return false;
+        }
+    }
 }
